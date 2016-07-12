@@ -1,0 +1,9 @@
+nimcache/
+build/*
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+
+!.gitkeep

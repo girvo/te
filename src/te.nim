@@ -1,8 +1,9 @@
 ## A tiny editor written in Nim
 
 import os, posix, strutils
-import ./editor
-import ./term
+import types
+import editor
+import term
 
 proc main(e: EditorConfig) =
   # Setup with the initial size

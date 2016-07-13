@@ -29,9 +29,7 @@ proc newEditorConfig(): EditorConfig = result
 let E = newEditorConfig()
 
 proc main() =
-  term.clear()
-  term.clear()
-  echo("Welcome...")
+  var size = term.calcSize()
 
 when isMainModule:
   main()

@@ -1,5 +1,6 @@
 nimcache/
 build/*
+nimsuggest.log
 
 # Editor
 .vscode/*

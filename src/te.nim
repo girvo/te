@@ -1,35 +1,19 @@
 ## A tiny editor written in Nim
 
-import os
-from ./term import nil
+import os, posix, strutils
+import ./editor
+import ./term
 
-type
-  FileInfo = ref object
-    filename: string
-    path: string
-    dirty: bool
+proc main(e: EditorConfig) =
+  # Setup with the initial size
+  var size: TermSize = term.calcSize()
+  e.size = size
 
-type
-  EditorConfig = ref object
-    ## Struct to hold useful data for our current editor/file
-    cx: int
-    cy: int
-    rowOffset: int
-    colOffset: int
-    screenRows: int
-    screenCols: int
-    numRows: int
-    filename: ref string
-    file: ref FileInfo
-    statusMessage: array[1..80, char]
-
-proc newEditorConfig(): EditorConfig = result
-
-# Actually setup our proper editorconfig object
-let E = newEditorConfig()
-
-proc main() =
-  var size = term.calcSize()
+  term.clear()
+  write(stdout, "Testing...\r\n")
+  signal(SIGWINCH, termResized)
+  while true:
+    discard
 
 when isMainModule:
-  main()
+  main(editorInst)

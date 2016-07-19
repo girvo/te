@@ -10,9 +10,9 @@ proc main(e: EditorConfig) =
   var size: TermSize = term.calcSize()
   e.size = size
 
-  term.clear()
-  write(stdout, "Testing...\r\n")
   signal(SIGWINCH, termResized)
+  write(stdout, "Testing...\r\n")
+
   while true:
     discard
 

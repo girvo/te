@@ -7,4 +7,4 @@ import types
 var editorInst*: EditorConfig = newEditorConfig()
 
 proc loadFile*(ed: EditorConfig, filename: string) =
-
+  discard

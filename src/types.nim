@@ -6,6 +6,7 @@ type
     filename*: string
     path*: string
     dirty*: bool
+    data*: seq[seq[char]]
 
 type
   TermSize* = ref object
@@ -34,4 +35,8 @@ proc newTermSize*(rows: Natural, cols: Natural): TermSize =
 proc newEditorConfig*(): EditorConfig = new(result)
 
 proc newFileInfo*(filename: string, path: string): FileInfo =
-  FileInfo(filename: filename, path: path, dirty: false)
+  FileInfo(
+    filename: filename,
+    path: path,
+    dirty: false,
+    data: @[@['\0']])

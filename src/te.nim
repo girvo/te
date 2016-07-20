@@ -5,16 +5,21 @@ import types
 import editor
 import term
 
-proc main(e: EditorConfig) =
+proc main() =
   # Setup with the initial size
   var size: TermSize = term.calcSize()
-  e.size = size
+  editorInst.size = size
+
+  # Read the file in
+  var file = newFileInfo("README.md", ".")
+  editorInst.file = file
+  editorInst.file.loadFile()
 
   signal(SIGWINCH, termResized)
-  write(stdout, "Testing...\r\n")
+  term.render()
 
   while true:
     discard
 
 when isMainModule:
-  main(editorInst)
+  main()

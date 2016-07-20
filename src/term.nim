@@ -21,13 +21,20 @@ proc clear*() =
   write(stdout, esc("2J") & esc("1;1H"))
 
 proc calcSize*(): TermSize =
-  ## Calculates the size of the terminal using ioctl
+  ## Calculates the size of the terminal using ioctl via C functions
   var cols = getCols()
   var rows = getRows()
   return newTermSize(rows, cols)
+
+proc render*() =
+  term.clear()
+  for row in editorInst.file.data:
+    for ch in row:
+      write(stdout, ch)
+    write(stdout, "\r\n")
 
 proc termResized*(x: cint) {.noconv.} =
   # Triggered by SIGWINCH signal on resize
   editorInst.size = calcSize()
   term.clear()
-  write(stdout, "Rows: " & $editorInst.size.rows & " Cols: " & $editorInst.size.cols & "\n")
+  term.render()

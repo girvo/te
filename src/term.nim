@@ -24,7 +24,8 @@ proc esc*(code: string): string =
 
 proc writeEsc*(code: string) =
   ## Writes the escape code out via POSIX layer
-  discard posix.write(STDOUT_FILENO, cstring(esc(code)), 6)
+  var str = esc(code)
+  discard posix.write(STDOUT_FILENO, cstring(str), len(str))
 
 proc moveCursor*(line: Natural, column: Natural) =
   write(stdout, esc($line & ';' & $column & 'H'))
